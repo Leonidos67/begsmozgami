@@ -424,6 +424,21 @@
                 });
             });
         </script>
+        <script>
+            // Обработчик закрытия QR-модального окна
+            document.addEventListener('DOMContentLoaded', function() {
+                var qrModal = document.getElementById('qr-modal');
+                var qrModalClose = document.getElementById('qr-modal-close');
+                if (qrModalClose && qrModal) {
+                    qrModalClose.addEventListener('click', function() {
+                        qrModal.classList.remove('active');
+                    });
+                    qrModal.addEventListener('click', function(e) {
+                        if (e.target === qrModal) qrModal.classList.remove('active');
+                    });
+                }
+            });
+        </script>
     </body>
     <style>
         #custom-context-menu {
@@ -570,9 +585,9 @@
             <div class="qr-modal-header">
                 <div class="qr-modal-caption">Наведите камеру телефона</div>
                 <button id="qr-modal-close" aria-label="Закрыть">
-                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
-                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M38.98242,6.9707c-0.52851,0.01247 -1.03058,0.23367 -1.39648,0.61523l-13.58594,13.58594l-13.58594,-13.58594c-0.37701,-0.38755 -0.89487,-0.60596 -1.43555,-0.60547c-0.81349,0.00101 -1.54534,0.49459 -1.85108,1.24844c-0.30574,0.75385 -0.12447,1.61777 0.4585,2.18515l13.58594,13.58594l-13.58594,13.58594c-0.52248,0.50163 -0.73294,1.24653 -0.55023,1.94741c0.18271,0.70088 0.73006,1.24823 1.43094,1.43094c0.70088,0.18271 1.44578,-0.02775 1.94741,-0.55023l13.58594,-13.58594l13.58594,13.58594c0.50163,0.52248 1.24653,0.73295 1.94742,0.55024c0.70088,-0.18271 1.24823,-0.73006 1.43094,-1.43094c0.18271,-0.70088 -0.02776,-1.44578 -0.55024,-1.94742l-13.58594,-13.58594l13.58594,-13.58594c0.59567,-0.57119 0.77939,-1.44958 0.46256,-2.21161c-0.31683,-0.76204 -1.06915,-1.25125 -1.8942,-1.23175z"></path></g></g>
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
+                        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M38.98242,6.9707c-0.52851,0.01247 -1.03058,0.23367 -1.39648,0.61523l-13.58594,13.58594l-13.58594,-13.58594c-0.37701,-0.38755 -0.89487,-0.60596 -1.43555,-0.60547c-0.81349,0.00101 -1.54534,0.49459 -1.85108,1.24844c-0.30574,0.75385 -0.12447,1.61777 0.4585,2.18515l13.58594,13.58594l-13.58594,13.58594c-0.52248,0.50163 -0.73294,1.24653 -0.55023,1.94741c0.18271,0.70088 0.73006,1.24823 1.43094,1.43094c0.70088,0.18271 1.44578,-0.02775 1.94741,-0.55023l13.58594,-13.58594l13.58594,13.58594c0.50163,0.52248 1.24653,0.73295 1.94742,0.55024c0.70088,-0.18271 1.24823,-0.73006 1.43094,-1.43094c0.18271,-0.70088 -0.02776,-1.44578 -0.55024,-1.94742l-13.58594,-13.58594l13.58594,-13.58594c0.59567,-0.57119 0.77939,-1.44958 0.46256,-2.21161c-0.31683,-0.76204 -1.06915,-1.25125 -1.8942,-1.23175z"></path></g></g>
+                    </svg>
                 </button>
             </div>
             <div class="qr-modal-img-wrap">
@@ -683,5 +698,72 @@
                 location.reload();
             });
         }
+    </script>
+    <!-- Уведомление о копировании -->
+    <div id="copy-toast" style="display:none;position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:11000;width:calc(100% - 20px);max-width:100vw;background:#030303;color:#fff;padding:16px 0px 0 0px;border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,0.25);font-size:15px;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+            <span id="copy-toast-text" style="flex:1;text-align:left;margin-left: 16px;">Ссылка скопирована</span>
+            <button id="copy-toast-close" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;margin-right:16px;opacity:0.7;">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256">
+                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M38.98242,6.9707c-0.52851,0.01247 -1.03058,0.23367 -1.39648,0.61523l-13.58594,13.58594l-13.58594,-13.58594c-0.37701,-0.38755 -0.89487,-0.60596 -1.43555,-0.60547c-0.81349,0.00101 -1.54534,0.49459 -1.85108,1.24844c-0.30574,0.75385 -0.12447,1.61777 0.4585,2.18515l13.58594,13.58594l-13.58594,13.58594c-0.52248,0.50163 -0.73294,1.24653 -0.55023,1.94741c0.18271,0.70088 0.73006,1.24823 1.43094,1.43094c0.70088,0.18271 1.44578,-0.02775 1.94741,-0.55023l13.58594,-13.58594l13.58594,13.58594c0.50163,0.52248 1.24653,0.73295 1.94742,0.55024c0.70088,-0.18271 1.24823,-0.73006 1.43094,-1.43094c0.18271,-0.70088 -0.02776,-1.44578 -0.55024,-1.94742l-13.58594,-13.58594l13.58594,-13.58594c0.59567,-0.57119 0.77939,-1.44958 0.46256,-2.21161c-0.31683,-0.76204 -1.06915,-1.25125 -1.8942,-1.23175z"></path></g></g>
+                </svg>
+            </button>
+        </div>
+        <div id="copy-toast-progress" style="height:4px;width:100%;background:rgba(255,255,255,0.15);border-radius:0 0 10px 10px;overflow:hidden;margin-top:12px;">
+            <div id="copy-toast-bar" style="height:100%;width:100%;background:#fff;transition:width 5s linear;"></div>
+        </div>
+    </div>
+    <script>
+        function showCopyToast(msg) {
+            var toast = document.getElementById('copy-toast');
+            var closeBtn = document.getElementById('copy-toast-close');
+            var text = document.getElementById('copy-toast-text');
+            var bar = document.getElementById('copy-toast-bar');
+            if (!toast || !closeBtn || !text || !bar) return;
+            text.textContent = msg || 'Ссылка скопирована';
+            toast.style.display = 'block';
+            bar.style.transition = 'none';
+            bar.style.width = '100%';
+            // Триггерим анимацию
+            setTimeout(function() {
+                bar.style.transition = 'width 5s linear';
+                bar.style.width = '0%';
+            }, 10);
+            if (toast._timeout) clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.style.display = 'none';
+                bar.style.transition = 'none';
+                bar.style.width = '100%';
+            }, 5000);
+        }
+        document.getElementById('copy-toast-close').onclick = function() {
+            var toast = document.getElementById('copy-toast');
+            var bar = document.getElementById('copy-toast-bar');
+            toast.style.display = 'none';
+            if (toast._timeout) clearTimeout(toast._timeout);
+            bar.style.transition = 'none';
+            bar.style.width = '100%';
+        };
+        document.querySelectorAll('.copy-link-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const link = 'https://t.me/begsmozgami_bot/app';
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(link).then(function() {
+                        showCopyToast('Ссылка скопирована');
+                    });
+                } else {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = link;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    try {
+                        document.execCommand('copy');
+                        showCopyToast('Ссылка скопирована');
+                    } catch (err) {}
+                    document.body.removeChild(tempInput);
+                }
+            });
+        });
     </script>
 </html>
