@@ -1,0 +1,103 @@
+body {
+    background: #030303;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+.container {
+    max-width: 400px;
+    margin: 10px auto;
+    background: #080808;
+    border-radius: 10px;
+    padding: 18px 18px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.profile-img {
+    width: 100%;
+    max-width: 340px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.messengers {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 32px;
+}
+.messenger {
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.messenger.telegram { background: #229ED9; }
+.messenger.whatsapp { background: #25D366; }
+.messenger.vk { background: #4C75A3; }
+.messenger:hover { filter: brightness(1.15); }
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.view-link {
+    color: #f1f1f1;
+    text-decoration: underline;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+.view-link:hover {
+    opacity: 1;
+}
+.header-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.pulse-circle {
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: #84cc16;
+    box-shadow: 0 0 0 0 #229ED980;
+    animation: pulse 1.4s infinite;
+}
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 #229ED980;
+    }
+    70% {
+        box-shadow: 0 0 0 12px #229ED900;
+    }
+    100% {
+        box-shadow: 0 0 0 0 #229ED900;
+    }
+}
+.oval-text {
+    background: rgb(132 204 22/0.1);
+    min-width: 0;
+    color: #84cc16;
+    border-radius: 999px;
+    padding: 7px 22px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-block;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
